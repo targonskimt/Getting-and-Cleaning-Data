@@ -4,17 +4,17 @@
 # upload X data
 X_train_temp <- read.table("train/X_train.txt")
 X_test_temp <- read.table("test/X_test.txt")
-X <- rbind(X_train_temp, X_test_temp)
+X <- rbind(X_train_temp, X_test_temp) #10299*561
 
 # upload Y data
 Y_train_temp <- read.table("train/y_train.txt")
 Y_test_temp <- read.table("test/y_test.txt")
-Y <- rbind(Y_train_temp, Y_test_temp)
+Y <- rbind(Y_train_temp, Y_test_temp) #10299*1
 
 # upload Subject (S) data
 S_train_temp <- read.table("train/subject_train.txt")
 S_test_temp <- read.table("test/subject_test.txt")
-S <- rbind(S_train_temp, S_test_temp)
+S <- rbind(S_train_temp, S_test_temp) #10299*1
 
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement
@@ -23,7 +23,7 @@ S <- rbind(S_train_temp, S_test_temp)
 desired_features <- read.table("features.txt")
 # identify indicies of desired feature and set them into X
 features_indices <- grep("-mean\\(\\)|-std\\(\\)", desired_features[, 2])
-X <- X[, features_indices]
+X <- X[, features_indices] #10299 * 66
 # set the names appropriately 
 names(X) <- desired_features[features_indices, 2]
 names(X) <- gsub("\\(|\\)", "", names(X))
@@ -35,7 +35,7 @@ names(X) <- gsub("\\(|\\)", "", names(X))
 activities <- read.table("activity_labels.txt")
 # remove '_' for consistency and set values 
 activities[, 2] = gsub("_", "", activities[, 2])
-Y[,1] = activities[Y[,1], 2]
+Y[,1] = activities[Y[,1], 2]  #10299*1
 # set the name to activity 
 names(Y) <- "activity"
 
@@ -45,18 +45,18 @@ names(Y) <- "activity"
 # set the names appropriately 
 names(S) <- "subject"
 # combine all 3 (Subject, Y , X)
-combined <- cbind(S, Y, X)
+combined <- cbind(S, Y, X) #10299*68
 
 
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject
 
 # set up the tidy result data frame
-Subject_num <- length(table(S))
-Activities_num <- dim(activities)[1]
-Column_num <- dim(combined)[2]
+Subject_num <- length(table(S)) #30
+Activities_num <- dim(activities)[1] #6
+Column_num <- dim(combined)[2] #68
 tidy <- matrix(NA, nrow=Subject_num * Activities_num, ncol=Column_num)
-tidy <- as.data.frame(tidy)
-colnames(tidy) <- colnames(combined) 
+tidy <- as.data.frame(tidy) #180*68
+colnames(tidy) <- colnames(combined)  
 
 # variables for loop
 row <- 1
