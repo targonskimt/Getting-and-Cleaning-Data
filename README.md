@@ -9,3 +9,7 @@ The following are the instructions to run the code (run_analysis.R) for the Gett
 3. Set the source to the 'run_analysis.R' 
 
 4. Set up to use data via read.table("tidy_result_Q5.txt"). This is the result table (dim of 180 * 68) that shows average of each variable for each of the activities for each of the subject. There are 6 activities with 30 subjects all together. 
+
+
+----
+Please see run_analysis.R to see the code with comments of how it works. 
