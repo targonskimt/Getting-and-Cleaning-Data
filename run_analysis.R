@@ -67,9 +67,9 @@ for (i in 1:Subject_num) {
     for (j in 1:Activities_num) {
         tidy[row, 1] = uniqueSubjects[i]
         tidy[row, 2] = activities[j, 2]
-        tmp <- combined[combined$subject==i & combined$activity==activities[j, 2], ]
-        tidy[row, 3:Column_num] <- colMeans(tmp[, 3:Column_num])
-        row = row+1
+        temp <- combined[combined$subject==i & combined$activity==activities[j, 2],]
+        tidy[row,3:Column_num] <- colMeans(temp[,3:Column_num])
+        row = row + 1
     }
 }
 
